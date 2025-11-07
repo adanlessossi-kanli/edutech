@@ -1,0 +1,10 @@
+{
+  "admin": {
+    "email": "admin@edutech.com",
+    "password": "admin123"
+  },
+  "user": {
+    "email": "user@edutech.com", 
+    "password": "user123"
+  }
+}

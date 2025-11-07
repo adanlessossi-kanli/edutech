@@ -1,0 +1,24 @@
+{
+  "users": {
+    "admin": {
+      "email": "admin@example.com",
+      "password": "password",
+      "name": "Admin User"
+    },
+    "user": {
+      "email": "user@example.com",
+      "password": "password",
+      "name": "Test User"
+    }
+  },
+  "workshop": {
+    "title": "Test Workshop",
+    "description": "Test Description",
+    "instructor": "Test Instructor",
+    "duration": "120",
+    "price": "99",
+    "category": "Frontend",
+    "level": "Beginner",
+    "maxParticipants": "20"
+  }
+}
