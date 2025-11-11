@@ -4,17 +4,18 @@
       <h1 class="logo">{{ title() }}</h1>
       
       <nav class="nav-menu">
-        <button (click)="showLanding()" class="nav-btn" [class.active]="currentView() === 'landing'">Home</button>
-        <button (click)="showWorkshops()" class="nav-btn" [class.active]="currentView() === 'workshops'">Workshops</button>
+        <app-language-switcher></app-language-switcher>
+        <button (click)="showLanding()" class="nav-btn" [class.active]="currentView() === 'landing'" i18n>Home</button>
+        <button (click)="showWorkshops()" class="nav-btn" [class.active]="currentView() === 'workshops'" i18n>Workshops</button>
         @if (isLoggedIn()) {
-          <button (click)="showDashboard()" class="nav-btn" [class.active]="currentView() === 'dashboard'">Dashboard</button>
+          <button (click)="showDashboard()" class="nav-btn" [class.active]="currentView() === 'dashboard'" i18n>Dashboard</button>
           @if (isAdmin()) {
-            <button (click)="showAdmin()" class="nav-btn" [class.active]="currentView() === 'admin'">Publish</button>
+            <button (click)="showAdmin()" class="nav-btn" [class.active]="currentView() === 'admin'" i18n>Publish</button>
           }
           <span class="user-info">{{ currentUser()?.name }}</span>
-          <button (click)="logout()" class="logout-btn">Logout</button>
+          <button (click)="logout()" class="logout-btn" i18n>Logout</button>
         } @else {
-          <button (click)="showAuth()" class="nav-btn" [class.active]="currentView() === 'auth'">Login</button>
+          <button (click)="showAuth()" class="nav-btn" [class.active]="currentView() === 'auth'" i18n>Login</button>
         }
       </nav>
     </div>

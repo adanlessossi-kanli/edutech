@@ -14,10 +14,11 @@ import { CareerSupportComponent } from './features/landing/career-support.compon
 import { FlexibleScheduleComponent } from './features/landing/flexible-schedule.component';
 import { CommunityComponent } from './features/landing/community.component';
 import { AuthService } from './core/services/auth.service';
+import { LanguageSwitcherComponent } from './shared/components/language-switcher/language-switcher.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, WorkshopListComponent, AuthComponent, AdminWorkshopFormComponent, UserDashboardComponent, LandingComponent, InstructorsComponent, HandsOnLearningComponent, CertificatesComponent, CareerSupportComponent, FlexibleScheduleComponent, CommunityComponent],
+  imports: [RouterOutlet, CommonModule, WorkshopListComponent, AuthComponent, AdminWorkshopFormComponent, UserDashboardComponent, LandingComponent, InstructorsComponent, HandsOnLearningComponent, CertificatesComponent, CareerSupportComponent, FlexibleScheduleComponent, CommunityComponent, LanguageSwitcherComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
