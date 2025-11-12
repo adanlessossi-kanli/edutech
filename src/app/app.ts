@@ -16,6 +16,7 @@ import { FlexibleScheduleComponent } from './features/landing/flexible-schedule.
 import { CommunityComponent } from './features/landing/community.component';
 import { AuthService } from './core/services/auth.service';
 import { LanguageSwitcherComponent } from './shared/components/language-switcher/language-switcher.component';
+import { PerformanceService } from './core/services/performance.service';
 
 @Component({
   selector: 'app-root',
@@ -27,10 +28,13 @@ export class App implements OnInit {
   protected readonly title = signal('EduTech Pro');
   private authService = inject(AuthService);
   private location = inject(Location);
+  private performanceService = inject(PerformanceService);
   
   currentView = signal<'landing' | 'workshops' | 'instructors' | 'hands-on' | 'certificates' | 'career' | 'flexible' | 'community' | 'admin' | 'auth' | 'dashboard' | 'settings'>('landing');
 
   ngOnInit() {
+    this.performanceService.measureWebVitals();
+    
     window.addEventListener('popstate', () => {
       const path = this.location.path().slice(1) || 'landing';
       this.currentView.set(path as any);
