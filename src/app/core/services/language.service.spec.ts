@@ -23,12 +23,13 @@ describe('LanguageService', () => {
   });
 
   it('should return supported locales', () => {
-    expect(service.getSupportedLocales()).toEqual(['en', 'fr']);
+    expect(service.getSupportedLocales()).toEqual(['en', 'fr', 'ar']);
   });
 
   it('should return language name', () => {
     expect(service.getLanguageName('en')).toBe('English');
     expect(service.getLanguageName('fr')).toBe('Français');
+    expect(service.getLanguageName('ar')).toBe('العربية');
   });
 
   it('should not switch to unsupported language', () => {

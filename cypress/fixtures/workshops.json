@@ -1,0 +1,34 @@
+{
+  "workshops": [
+    {
+      "title": "Advanced React Patterns",
+      "description": "Master advanced React patterns and best practices",
+      "instructor": "Jane Smith",
+      "duration": "180",
+      "price": "149",
+      "category": "Frontend",
+      "level": "Advanced",
+      "maxParticipants": "15"
+    },
+    {
+      "title": "Node.js Microservices",
+      "description": "Build scalable microservices with Node.js",
+      "instructor": "John Doe",
+      "duration": "240",
+      "price": "199",
+      "category": "Backend",
+      "level": "Intermediate",
+      "maxParticipants": "20"
+    },
+    {
+      "title": "Python for Data Science",
+      "description": "Learn data analysis and visualization with Python",
+      "instructor": "Sarah Johnson",
+      "duration": "200",
+      "price": "129",
+      "category": "Data Science",
+      "level": "Beginner",
+      "maxParticipants": "25"
+    }
+  ]
+}

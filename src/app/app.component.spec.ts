@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
 import { signal } from '@angular/core';
 import { App } from './app';
 import { AuthService } from './core/services/auth.service';
@@ -33,6 +34,7 @@ describe('App', () => {
     await TestBed.configureTestingModule({
       imports: [App],
       providers: [
+        provideHttpClient(),
         { provide: AuthService, useValue: authServiceSpy }
       ]
     }).compileComponents();

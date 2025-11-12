@@ -1,13 +1,38 @@
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { WorkshopService } from './workshop.service';
 import { Workshop } from '../models/workshop.model';
 
 describe('WorkshopService', () => {
   let service: WorkshopService;
+  let httpMock: HttpTestingController;
+
+  const mockWorkshops: Workshop[] = [
+    {
+      id: '1',
+      title: 'Advanced React Patterns',
+      description: 'Test',
+      instructor: 'Test',
+      duration: 180,
+      price: 149,
+      category: 'Frontend',
+      level: 'Advanced',
+      maxParticipants: 25,
+      currentParticipants: 5,
+      startDate: new Date(),
+      endDate: new Date(),
+      tags: ['React', 'JavaScript'],
+      isLive: false
+    }
+  ];
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [provideHttpClient(), provideHttpClientTesting()]
+    });
     service = TestBed.inject(WorkshopService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
   it('should be created', () => {
@@ -15,12 +40,13 @@ describe('WorkshopService', () => {
   });
 
   it('should return workshops', () => {
+    service.addWorkshop(mockWorkshops[0]);
     const workshops = service.getWorkshops()();
     expect(workshops.length).toBeGreaterThan(0);
-    expect(workshops[0].title).toBeDefined();
   });
 
   it('should find workshop by id', () => {
+    service.addWorkshop(mockWorkshops[0]);
     const workshop = service.getWorkshopById('1');
     expect(workshop).toBeTruthy();
     expect(workshop?.id).toBe('1');
@@ -32,18 +58,21 @@ describe('WorkshopService', () => {
   });
 
   it('should search workshops by title', () => {
+    service.addWorkshop(mockWorkshops[0]);
     const results = service.searchWorkshops('React');
     expect(results.length).toBeGreaterThan(0);
     expect(results[0].title.toLowerCase()).toContain('react');
   });
 
   it('should search workshops by category', () => {
+    service.addWorkshop(mockWorkshops[0]);
     const results = service.searchWorkshops('Frontend');
     expect(results.length).toBeGreaterThan(0);
     expect(results[0].category).toBe('Frontend');
   });
 
   it('should search workshops by tags', () => {
+    service.addWorkshop(mockWorkshops[0]);
     const results = service.searchWorkshops('JavaScript');
     expect(results.length).toBeGreaterThan(0);
     expect(results[0].tags).toContain('JavaScript');
@@ -74,19 +103,18 @@ describe('WorkshopService', () => {
   });
 
   it('should enroll user successfully', () => {
+    service.addWorkshop(mockWorkshops[0]);
     const result = service.enrollUser('1', 'user1');
     expect(result).toBe(true);
     
     const workshop = service.getWorkshopById('1');
-    expect(workshop?.currentParticipants).toBeGreaterThan(0);
+    expect(workshop?.currentParticipants).toBeGreaterThan(5);
   });
 
   it('should not enroll when workshop is full', () => {
-    const workshop = service.getWorkshopById('1');
-    if (workshop) {
-      workshop.currentParticipants = workshop.maxParticipants;
-      const result = service.enrollUser('1', 'user1');
-      expect(result).toBe(false);
-    }
+    const fullWorkshop = { ...mockWorkshops[0], currentParticipants: 25 };
+    service.addWorkshop(fullWorkshop);
+    const result = service.enrollUser('1', 'user1');
+    expect(result).toBe(false);
   });
 });

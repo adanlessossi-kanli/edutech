@@ -29,7 +29,7 @@ describe('LanguageSwitcherComponent', () => {
   it('should display language options', () => {
     const select = fixture.nativeElement.querySelector('select');
     expect(select).toBeTruthy();
-    expect(select.options.length).toBe(2);
+    expect(select.options.length).toBe(3);
   });
 
   it('should call switchLanguage on change', () => {
