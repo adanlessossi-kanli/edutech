@@ -1,6 +1,15 @@
 node_modules
+npm-debug.log
 dist
-coverage
 .angular
-cypress/screenshots
+coverage
+.git
+.gitignore
+README.md
+.editorconfig
+.vscode
 cypress/videos
+cypress/screenshots
+*.md
+.env*
+!.env.example
