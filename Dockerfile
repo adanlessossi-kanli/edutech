@@ -1,4 +1,5 @@
-FROM node:24-alpine
+# Build stage
+FROM node:24-alpine AS build
 
 WORKDIR /app
 
@@ -6,8 +7,14 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
+RUN npm run build
 
-EXPOSE 4200
+# Production stage
+FROM nginx:alpine
 
-CMD ["npx", "ng", "serve", "--host", "0.0.0.0"]
-#CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--disable-host-check"]
+COPY --from=build /app/dist/edutech/browser /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
