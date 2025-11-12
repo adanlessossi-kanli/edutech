@@ -47,118 +47,120 @@ interface Feature {
       </section>
     </div>
   `,
-  styles: [`
-    .community-page {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-    .page-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-    .page-header h1 {
-      font-size: 2.5rem;
-      color: #333;
-      margin: 0 0 15px 0;
-    }
-    .page-header p {
-      font-size: 1.2rem;
-      color: #666;
-    }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 30px;
-      margin-bottom: 80px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      padding: 60px 40px;
-      border-radius: 15px;
-    }
-    .stat {
-      text-align: center;
-      color: white;
-    }
-    .stat h3 {
-      font-size: 3rem;
-      margin: 0 0 10px 0;
-    }
-    .stat p {
-      font-size: 1.1rem;
-      margin: 0;
-      opacity: 0.9;
-    }
-    .features h2 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 40px;
-      color: #333;
-    }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 25px;
-    }
-    .feature-card {
-      background: white;
-      border-radius: 10px;
-      padding: 30px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.3s;
-    }
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
-    .icon {
-      font-size: 3rem;
-      display: block;
-      margin-bottom: 15px;
-    }
-    .feature-card h3 {
-      color: #667eea;
-      margin: 0 0 10px 0;
-      font-size: 1.3rem;
-    }
-    .feature-card p {
-      color: #666;
-      margin: 0;
-      line-height: 1.6;
-    }
-  `]
+  styles: [
+    `
+      .community-page {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+      .page-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+      .page-header h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin: 0 0 15px 0;
+      }
+      .page-header p {
+        font-size: 1.2rem;
+        color: #666;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-bottom: 80px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 60px 40px;
+        border-radius: 15px;
+      }
+      .stat {
+        text-align: center;
+        color: white;
+      }
+      .stat h3 {
+        font-size: 3rem;
+        margin: 0 0 10px 0;
+      }
+      .stat p {
+        font-size: 1.1rem;
+        margin: 0;
+        opacity: 0.9;
+      }
+      .features h2 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 40px;
+        color: #333;
+      }
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+      }
+      .feature-card {
+        background: white;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s;
+      }
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+      .icon {
+        font-size: 3rem;
+        display: block;
+        margin-bottom: 15px;
+      }
+      .feature-card h3 {
+        color: #667eea;
+        margin: 0 0 10px 0;
+        font-size: 1.3rem;
+      }
+      .feature-card p {
+        color: #666;
+        margin: 0;
+        line-height: 1.6;
+      }
+    `,
+  ],
 })
 export class CommunityComponent {
   features = signal<Feature[]>([
     {
       title: 'Discussion Forums',
       description: 'Ask questions and share knowledge with peers',
-      icon: '💬'
+      icon: '💬',
     },
     {
       title: 'Study Groups',
       description: 'Join or create groups to learn together',
-      icon: '👥'
+      icon: '👥',
     },
     {
       title: 'Live Events',
       description: 'Attend webinars, workshops, and networking events',
-      icon: '🎤'
+      icon: '🎤',
     },
     {
       title: 'Mentorship',
       description: 'Get guidance from experienced professionals',
-      icon: '🤝'
+      icon: '🤝',
     },
     {
       title: 'Code Reviews',
       description: 'Receive feedback on your projects from peers',
-      icon: '👨‍💻'
+      icon: '👨‍💻',
     },
     {
       title: 'Job Board',
       description: 'Access exclusive job opportunities from partners',
-      icon: '💼'
-    }
+      icon: '💼',
+    },
   ]);
 }

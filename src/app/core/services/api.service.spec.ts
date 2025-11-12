@@ -15,10 +15,10 @@ describe('ApiService', () => {
 
   it('should get workshops with loading state', async () => {
     expect(service.getLoading()()).toBe(false);
-    
+
     const workshopsPromise = service.getWorkshops();
     expect(service.getLoading()()).toBe(true);
-    
+
     const workshops = await workshopsPromise;
     expect(service.getLoading()()).toBe(false);
     expect(workshops.length).toBeGreaterThan(0);
@@ -41,7 +41,7 @@ describe('ApiService', () => {
 
   it('should set error state on failure', async () => {
     spyOn(service as any, 'getWorkshops').and.returnValue(Promise.reject('Error'));
-    
+
     try {
       await service.getWorkshops();
     } catch (error) {

@@ -15,7 +15,7 @@ describe('rateLimitGuard', () => {
 
   it('should allow requests within limit', () => {
     const route = { routeConfig: { path: 'test-limit' } } as ActivatedRouteSnapshot;
-    
+
     for (let i = 0; i < 50; i++) {
       const result = TestBed.runInInjectionContext(() => rateLimitGuard(route, {} as any));
       expect(result).toBe(true);
@@ -24,11 +24,11 @@ describe('rateLimitGuard', () => {
 
   it('should block requests exceeding limit', () => {
     const route = { routeConfig: { path: 'test-exceed' } } as ActivatedRouteSnapshot;
-    
+
     for (let i = 0; i < 100; i++) {
       TestBed.runInInjectionContext(() => rateLimitGuard(route, {} as any));
     }
-    
+
     const result = TestBed.runInInjectionContext(() => rateLimitGuard(route, {} as any));
     expect(result).toBe(false);
   });

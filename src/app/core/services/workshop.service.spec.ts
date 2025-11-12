@@ -23,13 +23,13 @@ describe('WorkshopService', () => {
       startDate: new Date(),
       endDate: new Date(),
       tags: ['React', 'JavaScript'],
-      isLive: false
-    }
+      isLive: false,
+    },
   ];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideHttpClient(), provideHttpClientTesting()]
+      providers: [provideHttpClient(), provideHttpClientTesting()],
     });
     service = TestBed.inject(WorkshopService);
     httpMock = TestBed.inject(HttpTestingController);
@@ -94,7 +94,7 @@ describe('WorkshopService', () => {
       startDate: new Date(),
       endDate: new Date(),
       tags: ['test'],
-      isLive: false
+      isLive: false,
     };
 
     service.addWorkshop(newWorkshop);
@@ -106,7 +106,7 @@ describe('WorkshopService', () => {
     service.addWorkshop(mockWorkshops[0]);
     const result = service.enrollUser('1', 'user1');
     expect(result).toBe(true);
-    
+
     const workshop = service.getWorkshopById('1');
     expect(workshop?.currentParticipants).toBeGreaterThan(5);
   });

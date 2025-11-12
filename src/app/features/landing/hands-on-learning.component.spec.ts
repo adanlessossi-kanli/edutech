@@ -7,7 +7,7 @@ describe('HandsOnLearningComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HandsOnLearningComponent]
+      imports: [HandsOnLearningComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HandsOnLearningComponent);

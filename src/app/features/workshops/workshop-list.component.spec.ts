@@ -27,20 +27,27 @@ describe('WorkshopListComponent', () => {
       startDate: new Date(),
       endDate: new Date(),
       tags: ['React', 'JavaScript'],
-      isLive: false
-    }
+      isLive: false,
+    },
   ];
 
   beforeEach(async () => {
-    const workshopServiceSpy = jasmine.createSpyObj('WorkshopService', ['getWorkshops', 'searchWorkshops']);
-    const apiServiceSpy = jasmine.createSpyObj('ApiService', ['getWorkshops', 'getLoading', 'getError']);
+    const workshopServiceSpy = jasmine.createSpyObj('WorkshopService', [
+      'getWorkshops',
+      'searchWorkshops',
+    ]);
+    const apiServiceSpy = jasmine.createSpyObj('ApiService', [
+      'getWorkshops',
+      'getLoading',
+      'getError',
+    ]);
 
     await TestBed.configureTestingModule({
       imports: [WorkshopListComponent, FormsModule],
       providers: [
         { provide: WorkshopService, useValue: workshopServiceSpy },
-        { provide: ApiService, useValue: apiServiceSpy }
-      ]
+        { provide: ApiService, useValue: apiServiceSpy },
+      ],
     }).compileComponents();
 
     workshopService = TestBed.inject(WorkshopService) as jasmine.SpyObj<WorkshopService>;
@@ -62,7 +69,7 @@ describe('WorkshopListComponent', () => {
 
   it('should load workshops on init', async () => {
     await component.ngOnInit();
-    
+
     expect(apiService.getWorkshops).toHaveBeenCalled();
     expect(component.filteredWorkshops().length).toBe(1);
   });
@@ -70,9 +77,9 @@ describe('WorkshopListComponent', () => {
   it('should apply search filters', () => {
     workshopService.searchWorkshops.and.returnValue(mockWorkshops);
     component.searchQuery.set('React');
-    
+
     component.onSearch();
-    
+
     expect(workshopService.searchWorkshops).toHaveBeenCalledWith('React');
   });
 
@@ -82,11 +89,11 @@ describe('WorkshopListComponent', () => {
       level: '',
       priceRange: { min: 0, max: 1000 },
       duration: '',
-      rating: 0
+      rating: 0,
     };
-    
+
     component.onFiltersChange(filters);
-    
+
     expect(component.currentFilters()).toEqual(filters);
   });
 
@@ -96,37 +103,37 @@ describe('WorkshopListComponent', () => {
       level: '',
       priceRange: { min: 50, max: 150 },
       duration: '',
-      rating: 0
+      rating: 0,
     };
-    
+
     component.onFiltersChange(filters);
-    
+
     const filtered = component.filteredWorkshops();
-    expect(filtered.every(w => w.price >= 50 && w.price <= 150)).toBe(true);
+    expect(filtered.every((w) => w.price >= 50 && w.price <= 150)).toBe(true);
   });
 
   it('should filter by duration', () => {
     const shortWorkshop = { ...mockWorkshops[0], duration: 60 };
     workshopService.getWorkshops.and.returnValue(signal([shortWorkshop]));
-    
+
     const filters = {
       category: '',
       level: '',
       priceRange: { min: 0, max: 1000 },
       duration: 'short',
-      rating: 0
+      rating: 0,
     };
-    
+
     component.onFiltersChange(filters);
-    
+
     const filtered = component.filteredWorkshops();
-    expect(filtered.every(w => w.duration < 120)).toBe(true);
+    expect(filtered.every((w) => w.duration < 120)).toBe(true);
   });
 
   it('should show loading state', () => {
     apiService.getLoading.and.returnValue(signal(true));
     fixture.detectChanges();
-    
+
     const loadingElement = fixture.nativeElement.querySelector('.loading');
     expect(loadingElement).toBeTruthy();
     expect(loadingElement.textContent).toContain('Loading workshops...');
@@ -135,7 +142,7 @@ describe('WorkshopListComponent', () => {
   it('should display workshops when not loading', () => {
     component.filteredWorkshops.set(mockWorkshops);
     fixture.detectChanges();
-    
+
     const workshopCards = fixture.nativeElement.querySelectorAll('app-workshop-card');
     expect(workshopCards.length).toBe(1);
   });
@@ -143,7 +150,7 @@ describe('WorkshopListComponent', () => {
   it('should show no results message when no workshops match', () => {
     component.filteredWorkshops.set([]);
     fixture.detectChanges();
-    
+
     const noResults = fixture.nativeElement.querySelector('.no-results');
     expect(noResults).toBeTruthy();
     expect(noResults.textContent).toContain('No workshops found');

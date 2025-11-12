@@ -6,8 +6,8 @@ export const csrfInterceptor: HttpInterceptorFn = (req, next) => {
     if (csrfToken) {
       req = req.clone({
         setHeaders: {
-          'X-CSRF-Token': csrfToken
-        }
+          'X-CSRF-Token': csrfToken,
+        },
       });
     }
   }

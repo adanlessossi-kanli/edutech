@@ -14,7 +14,7 @@ export const httpErrorInterceptor: HttpInterceptorFn = (req, next) => {
           return timer(retryCount * 1000);
         }
         throw error;
-      }
+      },
     }),
     catchError((error: HttpErrorResponse) => {
       let errorMessage = 'An error occurred';
@@ -29,10 +29,10 @@ export const httpErrorInterceptor: HttpInterceptorFn = (req, next) => {
         url: req.url,
         method: req.method,
         status: error.status,
-        message: errorMessage
+        message: errorMessage,
       });
 
       return throwError(() => error);
-    })
+    }),
   );
 };

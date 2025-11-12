@@ -12,9 +12,7 @@ describe('NotFoundComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [NotFoundComponent],
-      providers: [
-        { provide: Router, useValue: routerSpy }
-      ]
+      providers: [{ provide: Router, useValue: routerSpy }],
     }).compileComponents();
 
     router = TestBed.inject(Router) as jasmine.SpyObj<Router>;

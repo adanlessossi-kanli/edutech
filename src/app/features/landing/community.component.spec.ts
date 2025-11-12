@@ -7,7 +7,7 @@ describe('CommunityComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CommunityComponent]
+      imports: [CommunityComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CommunityComponent);

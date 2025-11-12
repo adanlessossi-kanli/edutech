@@ -7,9 +7,7 @@ describe('LanguageService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        { provide: LOCALE_ID, useValue: 'en' }
-      ]
+      providers: [{ provide: LOCALE_ID, useValue: 'en' }],
     });
     service = TestBed.inject(LanguageService);
   });

@@ -12,7 +12,7 @@ export class GlobalErrorHandler implements ErrorHandler {
     this.loggingService.error('Global Error', {
       message: errorMessage,
       stack: stackTrace,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     console.error('Global error:', error);

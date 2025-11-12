@@ -3,7 +3,7 @@ import { User } from '../models/workshop.model';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private currentUser = signal<User | null>(this.loadUserFromStorage());
@@ -25,9 +25,9 @@ export class AuthService {
       name: email.split('@')[0],
       role: email.includes('admin') ? 'admin' : 'student',
       enrolledWorkshops: [],
-      completedWorkshops: []
+      completedWorkshops: [],
     };
-    
+
     const mockToken = this.generateMockToken(mockUser);
     this.currentUser.set(mockUser);
     this.isAuthenticated.set(true);
@@ -43,9 +43,9 @@ export class AuthService {
       name,
       role: 'student',
       enrolledWorkshops: [],
-      completedWorkshops: []
+      completedWorkshops: [],
     };
-    
+
     this.currentUser.set(newUser);
     this.isAuthenticated.set(true);
     localStorage.setItem('currentUser', JSON.stringify(newUser));
@@ -81,6 +81,12 @@ export class AuthService {
   }
 
   private generateMockToken(user: User): string {
-    return btoa(JSON.stringify({ userId: user.id, email: user.email, exp: Date.now() + environment.auth.sessionTimeout }));
+    return btoa(
+      JSON.stringify({
+        userId: user.id,
+        email: user.email,
+        exp: Date.now() + environment.auth.sessionTimeout,
+      }),
+    );
   }
 }

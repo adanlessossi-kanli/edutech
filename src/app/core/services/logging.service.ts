@@ -4,14 +4,14 @@ import { environment } from '../../../environments/environment';
 type LogLevel = 'debug' | 'info' | 'warn' | 'error';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoggingService {
   private logLevels: Record<LogLevel, number> = {
     debug: 0,
     info: 1,
     warn: 2,
-    error: 3
+    error: 3,
   };
 
   private shouldLog(level: LogLevel): boolean {

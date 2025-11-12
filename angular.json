@@ -137,6 +137,12 @@
             ],
             "styles": [
               "src/styles.css"
+            ],
+            "codeCoverage": true,
+            "codeCoverageExclude": [
+              "**/*.spec.ts",
+              "**/test-setup.ts",
+              "**/environments/**"
             ]
           }
         }

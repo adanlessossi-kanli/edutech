@@ -12,19 +12,19 @@ describe('WorkshopReviewsComponent', () => {
 
   beforeEach(async () => {
     mockApiService = {
-      getReviews: jasmine.createSpy().and.returnValue(Promise.resolve([]))
+      getReviews: jasmine.createSpy().and.returnValue(Promise.resolve([])),
     };
     mockAuthService = {
       isLoggedIn: jasmine.createSpy().and.returnValue(signal(true)),
-      getCurrentUser: jasmine.createSpy().and.returnValue(signal({ id: '1', name: 'Test' }))
+      getCurrentUser: jasmine.createSpy().and.returnValue(signal({ id: '1', name: 'Test' })),
     };
 
     await TestBed.configureTestingModule({
       imports: [WorkshopReviewsComponent],
       providers: [
         { provide: ApiService, useValue: mockApiService },
-        { provide: AuthService, useValue: mockAuthService }
-      ]
+        { provide: AuthService, useValue: mockAuthService },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(WorkshopReviewsComponent);

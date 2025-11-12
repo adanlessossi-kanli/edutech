@@ -4,29 +4,34 @@ import { Review, Instructor, Payment, Progress } from '../models/enhanced.model'
 import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
   private loading = signal(false);
   private error = signal<string | null>(null);
 
-  getLoading() { return this.loading.asReadonly(); }
-  getError() { return this.error.asReadonly(); }
+  getLoading() {
+    return this.loading.asReadonly();
+  }
+  getError() {
+    return this.error.asReadonly();
+  }
 
   // Mock API calls with loading states
   async getWorkshops(): Promise<Workshop[]> {
     this.loading.set(true);
     this.error.set(null);
-    
+
     try {
       // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
       return [
         {
           id: '1',
           title: 'Advanced React Patterns',
-          description: 'Master advanced React patterns including hooks, context, and performance optimization',
+          description:
+            'Master advanced React patterns including hooks, context, and performance optimization',
           instructor: 'Sarah Chen',
           duration: 180,
           price: 149,
@@ -38,7 +43,7 @@ export class ApiService {
           endDate: new Date('2024-02-15T17:00:00'),
           tags: ['React', 'JavaScript', 'Performance'],
           isLive: false,
-          imageUrl: 'https://via.placeholder.com/400x200?text=React+Workshop'
+          imageUrl: 'https://via.placeholder.com/400x200?text=React+Workshop',
         },
         {
           id: '2',
@@ -55,8 +60,8 @@ export class ApiService {
           endDate: new Date('2024-02-20T14:00:00'),
           tags: ['Node.js', 'Microservices', 'Docker'],
           isLive: true,
-          imageUrl: 'https://via.placeholder.com/400x200?text=Node.js+Workshop'
-        }
+          imageUrl: 'https://via.placeholder.com/400x200?text=Node.js+Workshop',
+        },
       ];
     } catch (err) {
       this.error.set('Failed to load workshops');
@@ -69,7 +74,7 @@ export class ApiService {
   async enrollInWorkshop(workshopId: string, userId: string): Promise<boolean> {
     this.loading.set(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       return true;
     } catch (err) {
       this.error.set('Enrollment failed');
@@ -80,7 +85,7 @@ export class ApiService {
   }
 
   async getReviews(workshopId: string): Promise<Review[]> {
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise((resolve) => setTimeout(resolve, 300));
     return [
       {
         id: '1',
@@ -89,8 +94,8 @@ export class ApiService {
         userName: 'John Doe',
         rating: 5,
         comment: 'Excellent workshop! Learned a lot.',
-        createdAt: new Date()
-      }
+        createdAt: new Date(),
+      },
     ];
   }
 }

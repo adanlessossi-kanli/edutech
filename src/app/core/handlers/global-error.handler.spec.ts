@@ -10,10 +10,7 @@ describe('GlobalErrorHandler', () => {
     const loggingSpy = jasmine.createSpyObj('LoggingService', ['error']);
 
     TestBed.configureTestingModule({
-      providers: [
-        GlobalErrorHandler,
-        { provide: LoggingService, useValue: loggingSpy }
-      ]
+      providers: [GlobalErrorHandler, { provide: LoggingService, useValue: loggingSpy }],
     });
 
     handler = TestBed.inject(GlobalErrorHandler);
@@ -33,8 +30,11 @@ describe('GlobalErrorHandler', () => {
   it('should log error details', () => {
     const error = new Error('Test error message');
     handler.handleError(error);
-    expect(loggingService.error).toHaveBeenCalledWith('Global Error', jasmine.objectContaining({
-      message: 'Test error message'
-    }));
+    expect(loggingService.error).toHaveBeenCalledWith(
+      'Global Error',
+      jasmine.objectContaining({
+        message: 'Test error message',
+      }),
+    );
   });
 });

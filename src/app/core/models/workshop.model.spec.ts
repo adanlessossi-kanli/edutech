@@ -16,7 +16,7 @@ describe('Workshop Model', () => {
       startDate: new Date(),
       endDate: new Date(),
       tags: ['test'],
-      isLive: true
+      isLive: true,
     };
     expect(workshop.id).toBe('1');
   });
@@ -28,7 +28,7 @@ describe('Workshop Model', () => {
       name: 'Test',
       role: 'student',
       enrolledWorkshops: [],
-      completedWorkshops: []
+      completedWorkshops: [],
     };
     expect(user.role).toBe('student');
   });
@@ -40,7 +40,7 @@ describe('Workshop Model', () => {
       workshopId: '1',
       enrolledAt: new Date(),
       status: 'enrolled',
-      progress: 0
+      progress: 0,
     };
     expect(enrollment.status).toBe('enrolled');
   });

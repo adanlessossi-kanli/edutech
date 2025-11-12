@@ -9,7 +9,7 @@ describe('Enhanced Models', () => {
       userName: 'Test',
       rating: 5,
       comment: 'Great',
-      createdAt: new Date()
+      createdAt: new Date(),
     };
     expect(review.rating).toBe(5);
   });
@@ -21,7 +21,7 @@ describe('Enhanced Models', () => {
       bio: 'Expert',
       rating: 4.5,
       totalStudents: 100,
-      specialties: ['Tech']
+      specialties: ['Tech'],
     };
     expect(instructor.specialties).toContain('Tech');
   });
@@ -33,7 +33,7 @@ describe('Enhanced Models', () => {
       workshopId: '1',
       amount: 100,
       status: 'completed',
-      createdAt: new Date()
+      createdAt: new Date(),
     };
     expect(payment.status).toBe('completed');
   });
@@ -44,7 +44,7 @@ describe('Enhanced Models', () => {
       userId: '1',
       workshopId: '1',
       completionPercentage: 50,
-      lastAccessed: new Date()
+      lastAccessed: new Date(),
     };
     expect(progress.completionPercentage).toBe(50);
   });
@@ -57,7 +57,7 @@ describe('Enhanced Models', () => {
       title: 'New',
       message: 'Check it',
       read: false,
-      createdAt: new Date()
+      createdAt: new Date(),
     };
     expect(notification.read).toBe(false);
   });

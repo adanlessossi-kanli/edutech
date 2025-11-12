@@ -16,8 +16,8 @@ describe('httpErrorInterceptor', () => {
       providers: [
         provideHttpClient(withInterceptors([httpErrorInterceptor])),
         provideHttpClientTesting(),
-        { provide: LoggingService, useValue: loggingSpy }
-      ]
+        { provide: LoggingService, useValue: loggingSpy },
+      ],
     });
 
     httpMock = TestBed.inject(HttpTestingController);
@@ -31,7 +31,7 @@ describe('httpErrorInterceptor', () => {
 
   it('should log HTTP errors', () => {
     httpClient.get('/api/test').subscribe({
-      error: () => {}
+      error: () => {},
     });
 
     const req = httpMock.expectOne('/api/test');
@@ -42,7 +42,7 @@ describe('httpErrorInterceptor', () => {
 
   it('should handle 404 errors', () => {
     httpClient.get('/api/notfound').subscribe({
-      error: () => {}
+      error: () => {},
     });
 
     const req = httpMock.expectOne('/api/notfound');

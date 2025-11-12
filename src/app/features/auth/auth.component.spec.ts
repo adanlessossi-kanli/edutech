@@ -13,9 +13,7 @@ describe('AuthComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [AuthComponent, FormsModule],
-      providers: [
-        { provide: AuthService, useValue: authServiceSpy }
-      ]
+      providers: [{ provide: AuthService, useValue: authServiceSpy }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AuthComponent);
@@ -29,10 +27,10 @@ describe('AuthComponent', () => {
 
   it('should toggle between login and register modes', () => {
     expect(component.isLogin()).toBe(true);
-    
+
     component.toggleMode();
     expect(component.isLogin()).toBe(false);
-    
+
     component.toggleMode();
     expect(component.isLogin()).toBe(true);
   });

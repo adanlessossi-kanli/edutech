@@ -11,9 +11,7 @@ describe('LanguageSwitcherComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [LanguageSwitcherComponent],
-      providers: [
-        { provide: LOCALE_ID, useValue: 'en' }
-      ]
+      providers: [{ provide: LOCALE_ID, useValue: 'en' }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LanguageSwitcherComponent);

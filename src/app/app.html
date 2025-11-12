@@ -2,29 +2,73 @@
   <header class="main-header">
     <div class="header-content">
       <h1 class="logo">{{ title() }}</h1>
-      
+
       <nav class="nav-menu">
         <app-language-switcher></app-language-switcher>
-        <button (click)="showLanding()" class="nav-btn" [class.active]="currentView() === 'landing'" i18n>Home</button>
-        <button (click)="showWorkshops()" class="nav-btn" [class.active]="currentView() === 'workshops'" i18n>Workshops</button>
+        <button
+          (click)="showLanding()"
+          class="nav-btn"
+          [class.active]="currentView() === 'landing'"
+          i18n
+        >
+          Home
+        </button>
+        <button
+          (click)="showWorkshops()"
+          class="nav-btn"
+          [class.active]="currentView() === 'workshops'"
+          i18n
+        >
+          Workshops
+        </button>
         @if (isLoggedIn()) {
-          <button (click)="showDashboard()" class="nav-btn" [class.active]="currentView() === 'dashboard'" i18n>Dashboard</button>
+          <button
+            (click)="showDashboard()"
+            class="nav-btn"
+            [class.active]="currentView() === 'dashboard'"
+            i18n
+          >
+            Dashboard
+          </button>
           @if (isAdmin()) {
-            <button (click)="showAdmin()" class="nav-btn" [class.active]="currentView() === 'admin'" i18n>Publish</button>
+            <button
+              (click)="showAdmin()"
+              class="nav-btn"
+              [class.active]="currentView() === 'admin'"
+              i18n
+            >
+              Publish
+            </button>
           }
           <span class="user-info">{{ currentUser()?.name }}</span>
           <button (click)="showSettings()" class="settings-btn nav-btn">Settings</button>
           <button (click)="logout()" class="logout-btn" i18n>Logout</button>
         } @else {
-          <button (click)="showAuth()" class="nav-btn" [class.active]="currentView() === 'auth'" i18n>Login</button>
+          <button
+            (click)="showAuth()"
+            class="nav-btn"
+            [class.active]="currentView() === 'auth'"
+            i18n
+          >
+            Login
+          </button>
         }
       </nav>
     </div>
   </header>
-  
+
   <main class="main-content">
     @if (currentView() === 'landing') {
-      <app-landing (getStarted)="showAuth()" (viewWorkshops)="showWorkshops()" (viewInstructors)="showInstructors()" (viewHandsOn)="showHandsOn()" (viewCertificates)="showCertificates()" (viewCareer)="showCareer()" (viewFlexible)="showFlexible()" (viewCommunity)="showCommunity()"></app-landing>
+      <app-landing
+        (getStarted)="showAuth()"
+        (viewWorkshops)="showWorkshops()"
+        (viewInstructors)="showInstructors()"
+        (viewHandsOn)="showHandsOn()"
+        (viewCertificates)="showCertificates()"
+        (viewCareer)="showCareer()"
+        (viewFlexible)="showFlexible()"
+        (viewCommunity)="showCommunity()"
+      ></app-landing>
     } @else if (currentView() === 'workshops') {
       <app-workshop-list></app-workshop-list>
     } @else if (currentView() === 'instructors') {

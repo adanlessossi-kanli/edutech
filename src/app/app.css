@@ -5,7 +5,13 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
   background-color: #f8fafc;
   color: #334155;
 }
@@ -56,7 +62,8 @@ body {
   transition: all 0.2s;
 }
 
-.nav-btn:hover, .nav-btn.active {
+.nav-btn:hover,
+.nav-btn.active {
   color: #2563eb;
   background: #eff6ff;
 }
@@ -90,11 +97,11 @@ body {
   .header-content {
     padding: 0 16px;
   }
-  
+
   .nav-menu {
     gap: 16px;
   }
-  
+
   .nav-link {
     font-size: 14px;
   }

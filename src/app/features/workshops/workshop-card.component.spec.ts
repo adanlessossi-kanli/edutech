@@ -12,7 +12,7 @@ describe('WorkshopCardComponent', () => {
 
   beforeEach(async () => {
     mockAuthService = {
-      getCurrentUser: jasmine.createSpy().and.returnValue(signal({ id: '1', name: 'Test' }))
+      getCurrentUser: jasmine.createSpy().and.returnValue(signal({ id: '1', name: 'Test' })),
     };
     mockWorkshopService = jasmine.createSpyObj('WorkshopService', ['enroll']);
 
@@ -20,8 +20,8 @@ describe('WorkshopCardComponent', () => {
       imports: [WorkshopCardComponent],
       providers: [
         { provide: AuthService, useValue: mockAuthService },
-        { provide: WorkshopService, useValue: mockWorkshopService }
-      ]
+        { provide: WorkshopService, useValue: mockWorkshopService },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(WorkshopCardComponent);
@@ -40,7 +40,7 @@ describe('WorkshopCardComponent', () => {
       startDate: new Date(),
       endDate: new Date(),
       tags: [],
-      isLive: true
+      isLive: true,
     });
     fixture.detectChanges();
   });

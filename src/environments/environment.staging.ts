@@ -7,15 +7,15 @@ export const environment = {
   features: {
     enableNotifications: true,
     enableAnalytics: true,
-    enableOfflineMode: true
+    enableOfflineMode: true,
   },
   auth: {
     tokenKey: 'edutech_auth_token',
-    sessionTimeout: 3600000
+    sessionTimeout: 3600000,
   },
   thirdParty: {
     analyticsId: 'STAGING_ANALYTICS_ID',
     sentryDsn: 'STAGING_SENTRY_DSN',
-    stripePublicKey: 'STAGING_STRIPE_KEY'
-  }
+    stripePublicKey: 'STAGING_STRIPE_KEY',
+  },
 };

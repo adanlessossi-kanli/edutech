@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { LoggingService } from './logging.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PerformanceService {
   constructor(private loggingService: LoggingService) {}

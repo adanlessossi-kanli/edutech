@@ -7,7 +7,7 @@ describe('CareerSupportComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CareerSupportComponent]
+      imports: [CareerSupportComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CareerSupportComponent);

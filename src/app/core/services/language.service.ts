@@ -1,7 +1,7 @@
 import { Injectable, LOCALE_ID, Inject } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LanguageService {
   private currentLocale: string;
@@ -23,29 +23,27 @@ export class LanguageService {
     if (this.supportedLocales.includes(locale)) {
       const currentUrl = window.location.pathname;
       const baseUrl = window.location.origin;
-      
+
       // Remove current locale from URL if present
       let newPath = currentUrl;
-      this.supportedLocales.forEach(loc => {
+      this.supportedLocales.forEach((loc) => {
         if (currentUrl.startsWith(`/${loc}/`)) {
           newPath = currentUrl.substring(loc.length + 1);
         }
       });
-      
+
       // Add new locale to URL
-      const newUrl = locale === 'en' 
-        ? `${baseUrl}${newPath}` 
-        : `${baseUrl}/${locale}${newPath}`;
-      
+      const newUrl = locale === 'en' ? `${baseUrl}${newPath}` : `${baseUrl}/${locale}${newPath}`;
+
       window.location.href = newUrl;
     }
   }
 
   getLanguageName(locale: string): string {
     const names: { [key: string]: string } = {
-      'en': 'English',
-      'fr': 'Français',
-      'ar': 'العربية'
+      en: 'English',
+      fr: 'Français',
+      ar: 'العربية',
     };
     return names[locale] || locale;
   }

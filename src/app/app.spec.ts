@@ -8,9 +8,7 @@ describe('App', () => {
 
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [
-        { provide: PerformanceService, useValue: performanceSpy }
-      ]
+      providers: [{ provide: PerformanceService, useValue: performanceSpy }],
     }).compileComponents();
   });
 

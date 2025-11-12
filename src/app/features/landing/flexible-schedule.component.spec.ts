@@ -7,7 +7,7 @@ describe('FlexibleScheduleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FlexibleScheduleComponent]
+      imports: [FlexibleScheduleComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FlexibleScheduleComponent);

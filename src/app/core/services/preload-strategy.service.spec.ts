@@ -18,11 +18,11 @@ describe('CustomPreloadStrategy', () => {
   it('should preload route with preload flag', (done) => {
     const route: Route = {
       path: 'test',
-      data: { preload: true }
+      data: { preload: true },
     };
     const loadFn = () => of('loaded');
 
-    service.preload(route, loadFn).subscribe(result => {
+    service.preload(route, loadFn).subscribe((result) => {
       expect(result).toBe('loaded');
       done();
     });
@@ -30,11 +30,11 @@ describe('CustomPreloadStrategy', () => {
 
   it('should not preload route without preload flag', (done) => {
     const route: Route = {
-      path: 'test'
+      path: 'test',
     };
     const loadFn = () => of('loaded');
 
-    service.preload(route, loadFn).subscribe(result => {
+    service.preload(route, loadFn).subscribe((result) => {
       expect(result).toBeNull();
       done();
     });

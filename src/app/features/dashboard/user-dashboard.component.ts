@@ -36,68 +36,70 @@ import { Progress } from '../../core/models/enhanced.model';
             <app-progress-tracker [userProgress]="userProgress()"></app-progress-tracker>
           </div>
         </div>
-        
+
         <div class="sidebar-content">
           <app-notifications></app-notifications>
         </div>
       </div>
     </div>
   `,
-  styles: [`
-    .dashboard-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    .dashboard-header h1 {
-      margin-bottom: 20px;
-      color: #374151;
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-    .stat-card {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .stat-card h3 {
-      font-size: 2rem;
-      margin: 0 0 8px 0;
-      color: #059669;
-    }
-    .stat-card p {
-      margin: 0;
-      color: #6b7280;
-      font-weight: 500;
-    }
-    .dashboard-content {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 30px;
-    }
-    .enrolled-workshops h2 {
-      margin-bottom: 20px;
-      color: #374151;
-    }
-    @media (max-width: 768px) {
-      .dashboard-content {
-        grid-template-columns: 1fr;
+  styles: [
+    `
+      .dashboard-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
       }
-    }
-  `]
+      .dashboard-header h1 {
+        margin-bottom: 20px;
+        color: #374151;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+      .stat-card {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .stat-card h3 {
+        font-size: 2rem;
+        margin: 0 0 8px 0;
+        color: #059669;
+      }
+      .stat-card p {
+        margin: 0;
+        color: #6b7280;
+        font-weight: 500;
+      }
+      .dashboard-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 30px;
+      }
+      .enrolled-workshops h2 {
+        margin-bottom: 20px;
+        color: #374151;
+      }
+      @media (max-width: 768px) {
+        .dashboard-content {
+          grid-template-columns: 1fr;
+        }
+      }
+    `,
+  ],
 })
 export class UserDashboardComponent implements OnInit {
   private authService = inject(AuthService);
-  
+
   currentUser = this.authService.getCurrentUser();
   userProgress = signal<Progress[]>([]);
-  
+
   enrolledCount = signal(0);
   completedCount = signal(0);
   certificatesCount = signal(0);
@@ -115,7 +117,7 @@ export class UserDashboardComponent implements OnInit {
         workshopId: '1',
         completionPercentage: 75,
         lastAccessed: new Date(Date.now() - 2 * 60 * 60 * 1000),
-        certificateIssued: false
+        certificateIssued: false,
       },
       {
         id: '2',
@@ -123,13 +125,13 @@ export class UserDashboardComponent implements OnInit {
         workshopId: '2',
         completionPercentage: 100,
         lastAccessed: new Date(Date.now() - 24 * 60 * 60 * 1000),
-        certificateIssued: true
-      }
+        certificateIssued: true,
+      },
     ];
-    
+
     this.userProgress.set(mockProgress);
     this.enrolledCount.set(mockProgress.length);
-    this.completedCount.set(mockProgress.filter(p => p.completionPercentage === 100).length);
-    this.certificatesCount.set(mockProgress.filter(p => p.certificateIssued).length);
+    this.completedCount.set(mockProgress.filter((p) => p.completionPercentage === 100).length);
+    this.certificatesCount.set(mockProgress.filter((p) => p.certificateIssued).length);
   }
 }

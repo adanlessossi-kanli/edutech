@@ -7,7 +7,7 @@ describe('WorkshopFiltersComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WorkshopFiltersComponent]
+      imports: [WorkshopFiltersComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(WorkshopFiltersComponent);

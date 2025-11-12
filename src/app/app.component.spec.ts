@@ -16,7 +16,7 @@ describe('App', () => {
     name: 'Test User',
     role: 'student',
     enrolledWorkshops: [],
-    completedWorkshops: []
+    completedWorkshops: [],
   };
 
   const mockAdmin: User = {
@@ -25,18 +25,20 @@ describe('App', () => {
     name: 'Admin User',
     role: 'admin',
     enrolledWorkshops: [],
-    completedWorkshops: []
+    completedWorkshops: [],
   };
 
   beforeEach(async () => {
-    const authServiceSpy = jasmine.createSpyObj('AuthService', ['isLoggedIn', 'getCurrentUser', 'isAdmin', 'logout']);
+    const authServiceSpy = jasmine.createSpyObj('AuthService', [
+      'isLoggedIn',
+      'getCurrentUser',
+      'isAdmin',
+      'logout',
+    ]);
 
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [
-        provideHttpClient(),
-        { provide: AuthService, useValue: authServiceSpy }
-      ]
+      providers: [provideHttpClient(), { provide: AuthService, useValue: authServiceSpy }],
     }).compileComponents();
 
     authService = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
@@ -63,7 +65,7 @@ describe('App', () => {
   it('should show login button when not logged in', () => {
     authService.isLoggedIn.and.returnValue(signal(false));
     fixture.detectChanges();
-    
+
     const loginBtn = fixture.nativeElement.querySelector('button[class*="nav-btn"]:last-child');
     expect(loginBtn.textContent.trim()).toBe('Login');
   });
@@ -73,7 +75,7 @@ describe('App', () => {
     authService.getCurrentUser.and.returnValue(signal(mockUser));
     authService.isAdmin.and.returnValue(false);
     fixture.detectChanges();
-    
+
     const userInfo = fixture.nativeElement.querySelector('.user-info');
     expect(userInfo.textContent).toBe('Test User');
   });
@@ -83,7 +85,7 @@ describe('App', () => {
     authService.getCurrentUser.and.returnValue(signal(mockUser));
     authService.isAdmin.and.returnValue(false);
     fixture.detectChanges();
-    
+
     const logoutBtn = fixture.nativeElement.querySelector('.logout-btn');
     expect(logoutBtn.textContent).toBe('Logout');
   });
@@ -93,7 +95,7 @@ describe('App', () => {
     authService.getCurrentUser.and.returnValue(signal(mockAdmin));
     authService.isAdmin.and.returnValue(true);
     fixture.detectChanges();
-    
+
     const buttons = fixture.nativeElement.querySelectorAll('.nav-btn');
     const publishBtn = Array.from(buttons).find((btn: any) => btn.textContent.trim() === 'Publish');
     expect(publishBtn).toBeTruthy();
@@ -104,7 +106,7 @@ describe('App', () => {
     authService.getCurrentUser.and.returnValue(signal(mockUser));
     authService.isAdmin.and.returnValue(false);
     fixture.detectChanges();
-    
+
     const buttons = fixture.nativeElement.querySelectorAll('.nav-btn');
     const publishBtn = Array.from(buttons).find((btn: any) => btn.textContent.includes('Publish'));
     expect(publishBtn).toBeFalsy();
@@ -115,34 +117,36 @@ describe('App', () => {
     authService.getCurrentUser.and.returnValue(signal(mockUser));
     authService.isAdmin.and.returnValue(false);
     fixture.detectChanges();
-    
+
     const buttons = fixture.nativeElement.querySelectorAll('.nav-btn');
-    const dashboardBtn = Array.from(buttons).find((btn: any) => btn.textContent.trim() === 'Dashboard');
+    const dashboardBtn = Array.from(buttons).find(
+      (btn: any) => btn.textContent.trim() === 'Dashboard',
+    );
     expect(dashboardBtn).toBeTruthy();
   });
 
   it('should navigate to different views', () => {
     component.showLanding();
     expect(component.currentView()).toBe('landing');
-    
+
     component.showWorkshops();
     expect(component.currentView()).toBe('workshops');
-    
+
     component.showAuth();
     expect(component.currentView()).toBe('auth');
-    
+
     component.showDashboard();
     expect(component.currentView()).toBe('dashboard');
-    
+
     component.showAdmin();
     expect(component.currentView()).toBe('admin');
   });
 
   it('should call logout service and reset view', () => {
     component.showDashboard();
-    
+
     component.logout();
-    
+
     expect(authService.logout).toHaveBeenCalled();
     expect(component.currentView()).toBe('workshops');
   });
@@ -150,7 +154,7 @@ describe('App', () => {
   it('should display landing by default', () => {
     authService.isLoggedIn.and.returnValue(signal(false));
     fixture.detectChanges();
-    
+
     const landing = fixture.nativeElement.querySelector('app-landing');
     expect(landing).toBeTruthy();
   });
@@ -158,7 +162,7 @@ describe('App', () => {
   it('should display auth component when in auth view', () => {
     component.showAuth();
     fixture.detectChanges();
-    
+
     const authComponent = fixture.nativeElement.querySelector('app-auth');
     expect(authComponent).toBeTruthy();
   });
@@ -168,7 +172,7 @@ describe('App', () => {
     authService.getCurrentUser.and.returnValue(signal(mockUser));
     component.showDashboard();
     fixture.detectChanges();
-    
+
     const dashboard = fixture.nativeElement.querySelector('app-user-dashboard');
     expect(dashboard).toBeTruthy();
   });
@@ -179,7 +183,7 @@ describe('App', () => {
     authService.isAdmin.and.returnValue(true);
     component.showAdmin();
     fixture.detectChanges();
-    
+
     const adminForm = fixture.nativeElement.querySelector('app-admin-workshop-form');
     expect(adminForm).toBeTruthy();
   });
@@ -190,9 +194,11 @@ describe('App', () => {
     authService.isAdmin.and.returnValue(false);
     component.showDashboard();
     fixture.detectChanges();
-    
+
     const buttons = fixture.nativeElement.querySelectorAll('.nav-btn');
-    const dashboardBtn = Array.from(buttons).find((btn: any) => btn.textContent.trim() === 'Dashboard');
+    const dashboardBtn = Array.from(buttons).find(
+      (btn: any) => btn.textContent.trim() === 'Dashboard',
+    );
     expect(dashboardBtn).toBeTruthy();
     expect((dashboardBtn as HTMLElement).classList.contains('active')).toBe(true);
   });
