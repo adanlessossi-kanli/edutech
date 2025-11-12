@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { Workshop, User } from '../models/workshop.model';
 import { Review, Instructor, Payment, Progress } from '../models/enhanced.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
