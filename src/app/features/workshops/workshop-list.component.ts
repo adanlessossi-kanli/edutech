@@ -1,6 +1,7 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { WorkshopService } from '../../core/services/workshop.service';
 import { WorkshopCardComponent } from './workshop-card.component';
 import { WorkshopFiltersComponent, FilterOptions } from './workshop-filters.component';
@@ -9,7 +10,14 @@ import { ApiService } from '../../core/services/api.service';
 @Component({
   selector: 'app-workshop-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, WorkshopCardComponent, WorkshopFiltersComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ScrollingModule,
+    WorkshopCardComponent,
+    WorkshopFiltersComponent,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="workshop-list-container">
       <div class="header">
@@ -53,14 +61,16 @@ import { ApiService } from '../../core/services/api.service';
         <div class="workshops-main">
           @if (apiService.getLoading()()) {
             <div class="loading">Loading workshops...</div>
+          } @else if (filteredWorkshops().length === 0) {
+            <p class="no-results">No workshops found matching your criteria.</p>
           } @else {
-            <div class="workshops-grid">
-              @for (workshop of filteredWorkshops(); track workshop.id) {
-                <app-workshop-card [workshop]="workshop"></app-workshop-card>
-              } @empty {
-                <p class="no-results">No workshops found matching your criteria.</p>
-              }
-            </div>
+            <cdk-virtual-scroll-viewport itemSize="300" class="workshops-viewport">
+              <div class="workshops-grid">
+                @for (workshop of filteredWorkshops(); track workshop.id) {
+                  <app-workshop-card [workshop]="workshop"></app-workshop-card>
+                }
+              </div>
+            </cdk-virtual-scroll-viewport>
           }
         </div>
       </div>
@@ -122,10 +132,15 @@ import { ApiService } from '../../core/services/api.service';
         position: sticky;
         top: 20px;
       }
+      .workshops-viewport {
+        height: 800px;
+        width: 100%;
+      }
       .workshops-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
         gap: 20px;
+        padding: 10px;
       }
       .loading {
         text-align: center;

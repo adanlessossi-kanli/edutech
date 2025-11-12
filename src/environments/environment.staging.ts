@@ -18,4 +18,8 @@ export const environment = {
     sentryDsn: 'STAGING_SENTRY_DSN',
     stripePublicKey: 'STAGING_STRIPE_KEY',
   },
+  cdn: {
+    baseUrl: 'https://cdn-staging.edutech.com',
+    enabled: true,
+  },
 };

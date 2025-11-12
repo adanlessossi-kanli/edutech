@@ -1,4 +1,4 @@
-import { Component, input, inject, signal } from '@angular/core';
+import { Component, input, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Workshop } from '../../core/models/workshop.model';
 import { AuthService } from '../../core/services/auth.service';
@@ -8,6 +8,7 @@ import { WorkshopService } from '../../core/services/workshop.service';
   selector: 'app-workshop-card',
   standalone: true,
   imports: [CommonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="workshop-card">
       <div class="workshop-header">

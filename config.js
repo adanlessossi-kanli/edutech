@@ -37,6 +37,10 @@ const envConfig = {
     analyticsId: process.env.ANALYTICS_ID || config.ANALYTICS_ID || '',
     sentryDsn: process.env.SENTRY_DSN || config.SENTRY_DSN || '',
     stripePublicKey: process.env.STRIPE_PUBLIC_KEY || config.STRIPE_PUBLIC_KEY || ''
+  },
+  cdn: {
+    baseUrl: process.env.CDN_BASE_URL || config.CDN_BASE_URL || '',
+    enabled: (process.env.CDN_ENABLED || config.CDN_ENABLED || 'false') === 'true'
   }
 };
 

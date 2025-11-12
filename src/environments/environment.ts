@@ -18,4 +18,8 @@ export const environment = {
     sentryDsn: '',
     stripePublicKey: '',
   },
+  cdn: {
+    baseUrl: '',
+    enabled: false,
+  },
 };
