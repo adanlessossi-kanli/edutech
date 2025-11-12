@@ -32,11 +32,17 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "manifest.webmanifest",
+                "input": "src",
+                "output": "/"
               }
             ],
             "styles": [
               "src/styles.css"
             ],
+            "serviceWorker": "ngsw-config.json",
             "localize": true
           },
           "configurations": {
