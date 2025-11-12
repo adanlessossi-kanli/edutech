@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { AuthService } from './auth.service';
+import { environment } from '../../../environments/environment';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -51,5 +52,24 @@ describe('AuthService', () => {
     
     service.login('admin@example.com', 'password');
     expect(service.isAdmin()).toBe(true);
+  });
+
+  it('should set token on login', () => {
+    service.login('test@example.com', 'password');
+    const token = service.getToken();
+    expect(token).toBeTruthy();
+  });
+
+  it('should remove token on logout', () => {
+    service.login('test@example.com', 'password');
+    service.logout();
+    const token = service.getToken();
+    expect(token).toBeNull();
+  });
+
+  it('should store token in localStorage with correct key', () => {
+    service.login('test@example.com', 'password');
+    const storedToken = localStorage.getItem(environment.auth.tokenKey);
+    expect(storedToken).toBeTruthy();
   });
 });
