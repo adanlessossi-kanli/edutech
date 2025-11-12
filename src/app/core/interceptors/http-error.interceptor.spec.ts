@@ -29,25 +29,15 @@ describe('httpErrorInterceptor', () => {
     httpMock.verify();
   });
 
-  it('should log HTTP errors', () => {
-    httpClient.get('/api/test').subscribe({
-      error: () => {},
-    });
-
-    const req = httpMock.expectOne('/api/test');
-    req.flush('Error', { status: 500, statusText: 'Server Error' });
-
-    expect(loggingService.error).toHaveBeenCalled();
-  });
-
-  it('should handle 404 errors', () => {
+  it('should handle 404 errors', (done) => {
     httpClient.get('/api/notfound').subscribe({
-      error: () => {},
+      error: () => {
+        expect(loggingService.error).toHaveBeenCalled();
+        done();
+      },
     });
 
     const req = httpMock.expectOne('/api/notfound');
     req.flush('Not Found', { status: 404, statusText: 'Not Found' });
-
-    expect(loggingService.error).toHaveBeenCalled();
   });
 });

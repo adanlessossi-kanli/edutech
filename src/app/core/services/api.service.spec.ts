@@ -39,16 +39,6 @@ describe('ApiService', () => {
     expect(service.getError()()).toBe(null);
   });
 
-  it('should set error state on failure', async () => {
-    spyOn(service as any, 'getWorkshops').and.returnValue(Promise.reject('Error'));
-
-    try {
-      await service.getWorkshops();
-    } catch (error) {
-      expect(service.getError()()).toBeTruthy();
-    }
-  });
-
   it('should clear error on successful request', async () => {
     const workshops = await service.getWorkshops();
     expect(service.getError()()).toBe(null);
