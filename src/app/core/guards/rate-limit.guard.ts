@@ -1,4 +1,3 @@
-import { inject } from '@angular/core';
 import { CanActivateFn } from '@angular/router';
 
 const requestCounts = new Map<string, { count: number; resetTime: number }>();

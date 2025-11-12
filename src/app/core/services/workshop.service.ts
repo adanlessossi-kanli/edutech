@@ -44,7 +44,7 @@ export class WorkshopService {
     this.workshops.update((workshops) => [...workshops, workshop]);
   }
 
-  enrollUser(workshopId: string, userId: string): boolean {
+  enrollUser(workshopId: string, _userId: string): boolean {
     const workshop = this.getWorkshopById(workshopId);
     if (workshop && workshop.currentParticipants < workshop.maxParticipants) {
       this.workshops.update((workshops) =>

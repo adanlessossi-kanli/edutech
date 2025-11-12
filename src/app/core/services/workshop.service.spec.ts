@@ -1,12 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { WorkshopService } from './workshop.service';
 import { Workshop } from '../models/workshop.model';
 
 describe('WorkshopService', () => {
   let service: WorkshopService;
-  let httpMock: HttpTestingController;
 
   const mockWorkshops: Workshop[] = [
     {
@@ -32,7 +31,6 @@ describe('WorkshopService', () => {
       providers: [provideHttpClient(), provideHttpClientTesting()],
     });
     service = TestBed.inject(WorkshopService);
-    httpMock = TestBed.inject(HttpTestingController);
   });
 
   it('should be created', () => {

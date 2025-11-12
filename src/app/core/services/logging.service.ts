@@ -44,7 +44,7 @@ export class LoggingService {
     }
   }
 
-  private sendToMonitoring(message: string, data?: any): void {
+  private sendToMonitoring(_message: string, _data?: any): void {
     if (environment.production && environment.thirdParty.sentryDsn) {
       // Send to monitoring service (Sentry, CloudWatch, etc.)
       // Implementation would go here

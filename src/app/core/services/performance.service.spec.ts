@@ -4,7 +4,6 @@ import { LoggingService } from './logging.service';
 
 describe('PerformanceService', () => {
   let service: PerformanceService;
-  let loggingService: jasmine.SpyObj<LoggingService>;
 
   beforeEach(() => {
     const loggingSpy = jasmine.createSpyObj('LoggingService', ['info']);
@@ -14,7 +13,6 @@ describe('PerformanceService', () => {
     });
 
     service = TestBed.inject(PerformanceService);
-    loggingService = TestBed.inject(LoggingService) as jasmine.SpyObj<LoggingService>;
   });
 
   it('should be created', () => {

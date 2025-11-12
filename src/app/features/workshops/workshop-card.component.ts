@@ -4,8 +4,6 @@ import { Workshop } from '../../core/models/workshop.model';
 import { AuthService } from '../../core/services/auth.service';
 import { WorkshopService } from '../../core/services/workshop.service';
 
-import { WorkshopReviewsComponent } from './workshop-reviews.component';
-
 @Component({
   selector: 'app-workshop-card',
   standalone: true,

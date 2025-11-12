@@ -1,12 +1,13 @@
-import { Injectable, signal } from '@angular/core';
-import { Workshop, User } from '../models/workshop.model';
-import { Review, Instructor, Payment, Progress } from '../models/enhanced.model';
-import { environment } from '../../../environments/environment';
+import { Injectable, signal, inject } from '@angular/core';
+import { Workshop } from '../models/workshop.model';
+import { Review } from '../models/enhanced.model';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
+  private cache = inject(CacheService);
   private loading = signal(false);
   private error = signal<string | null>(null);
 
@@ -19,14 +20,16 @@ export class ApiService {
 
   // Mock API calls with loading states
   async getWorkshops(): Promise<Workshop[]> {
+    const cached = this.cache.get<Workshop[]>('workshops');
+    if (cached) return cached;
+
     this.loading.set(true);
     this.error.set(null);
 
     try {
-      // Simulate API delay
       await new Promise((resolve) => setTimeout(resolve, 500));
 
-      return [
+      const workshops: Workshop[] = [
         {
           id: '1',
           title: 'Advanced React Patterns',
@@ -63,6 +66,9 @@ export class ApiService {
           imageUrl: 'https://via.placeholder.com/400x200?text=Node.js+Workshop',
         },
       ];
+
+      this.cache.set('workshops', workshops, 300000);
+      return workshops;
     } catch (err) {
       this.error.set('Failed to load workshops');
       throw err;
@@ -71,12 +77,12 @@ export class ApiService {
     }
   }
 
-  async enrollInWorkshop(workshopId: string, userId: string): Promise<boolean> {
+  async enrollInWorkshop(_workshopId: string, _userId: string): Promise<boolean> {
     this.loading.set(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       return true;
-    } catch (err) {
+    } catch {
       this.error.set('Enrollment failed');
       return false;
     } finally {

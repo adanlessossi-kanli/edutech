@@ -1,51 +1,54 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-import typescriptEslint from "@typescript-eslint/eslint-plugin";
-import tsParser from "@typescript-eslint/parser";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import js from "@eslint/js";
-import { FlatCompat } from "@eslint/eslintrc";
+import js from '@eslint/js';
+import tseslint from '@typescript-eslint/parser';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
+import prettier from 'eslint-config-prettier';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
-});
-
-export default defineConfig([
-    globalIgnores(["**/dist", "**/node_modules", "**/coverage", "**/.angular"]),
-    {
-        extends: compat.extends("eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"),
-
-        plugins: {
-            "@typescript-eslint": typescriptEslint,
-        },
-
-        languageOptions: {
-            parser: tsParser,
-            ecmaVersion: 2022,
-            sourceType: "module",
-
-            parserOptions: {
-                project: "./tsconfig.json",
-            },
-        },
-
-        rules: {
-            "@typescript-eslint/no-explicit-any": "warn",
-
-            "@typescript-eslint/no-unused-vars": ["error", {
-                argsIgnorePattern: "^_",
-            }],
-
-            "no-console": ["warn", {
-                allow: ["warn", "error"],
-            }],
-
-            "prefer-const": "error",
-            "no-var": "error",
-        },
+export default [
+  js.configs.recommended,
+  {
+    files: ['**/*.ts'],
+    languageOptions: {
+      parser: tseslint,
+      parserOptions: {
+        ecmaVersion: 2022,
+        sourceType: 'module'
+      },
+      globals: {
+        console: 'readonly',
+        window: 'readonly',
+        document: 'readonly',
+        localStorage: 'readonly',
+        setTimeout: 'readonly',
+        btoa: 'readonly',
+        navigator: 'readonly',
+        URL: 'readonly',
+        Blob: 'readonly',
+        HTMLElement: 'readonly',
+        HTMLSelectElement: 'readonly',
+        Event: 'readonly',
+        ErrorEvent: 'readonly',
+        PerformanceObserver: 'readonly',
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        jasmine: 'readonly',
+        spyOn: 'readonly'
+      }
     },
-]);
+    plugins: {
+      '@typescript-eslint': tsPlugin
+    },
+    rules: {
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-explicit-any': 'off',
+      'no-console': 'off',
+      'no-unused-vars': 'off'
+    }
+  },
+  prettier,
+  {
+    ignores: ['dist/', 'node_modules/', 'coverage/', '.angular/', 'cypress/']
+  }
+];

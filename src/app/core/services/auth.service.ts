@@ -17,7 +17,7 @@ export class AuthService {
     return this.isAuthenticated.asReadonly();
   }
 
-  login(email: string, password: string): boolean {
+  login(email: string, _password: string): boolean {
     // Mock authentication
     const mockUser: User = {
       id: '1',
