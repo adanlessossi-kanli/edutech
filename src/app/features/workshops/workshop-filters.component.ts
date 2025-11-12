@@ -21,18 +21,19 @@ export interface FilterOptions {
       <div class="filter-group">
         <label>Category</label>
         <select [(ngModel)]="filters.category" (change)="onFilterChange()">
-          <option value="">All Categories</option>
+          <option value="">All</option>
           <option value="Frontend">Frontend</option>
           <option value="Backend">Backend</option>
           <option value="DevOps">DevOps</option>
           <option value="Mobile">Mobile</option>
+          <option value="Data Science">Data Science</option>
         </select>
       </div>
 
       <div class="filter-group">
         <label>Level</label>
         <select [(ngModel)]="filters.level" (change)="onFilterChange()">
-          <option value="">All Levels</option>
+          <option value="">All</option>
           <option value="Beginner">Beginner</option>
           <option value="Intermediate">Intermediate</option>
           <option value="Advanced">Advanced</option>

@@ -6,6 +6,11 @@ describe('Admin Workshop Form', () => {
   beforeEach(() => {
     cy.loginAsAdmin();
     adminPage.visit();
+    cy.waitForPageLoad();
+  });
+
+  afterEach(() => {
+    cy.logout();
   });
 
   it('should display form container', () => {
@@ -31,6 +36,7 @@ describe('Admin Workshop Form', () => {
     adminPage.fillMaxParticipants('20');
     adminPage.fillDates('2024-12-01T10:00', '2024-12-01T12:00');
     adminPage.submit();
+    cy.waitForPageLoad();
   });
 
   it('should display category options', () => {

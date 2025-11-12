@@ -1,7 +1,7 @@
 describe('Notifications', () => {
   beforeEach(() => {
     cy.loginAsUser();
-    cy.get('.nav-btn').contains('Dashboard').click();
+    cy.contains('button', 'Dashboard').click();
   });
 
   it('should display notifications container', () => {

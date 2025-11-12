@@ -13,6 +13,7 @@
             <button (click)="showAdmin()" class="nav-btn" [class.active]="currentView() === 'admin'" i18n>Publish</button>
           }
           <span class="user-info">{{ currentUser()?.name }}</span>
+          <button (click)="showSettings()" class="settings-btn nav-btn">Settings</button>
           <button (click)="logout()" class="logout-btn" i18n>Logout</button>
         } @else {
           <button (click)="showAuth()" class="nav-btn" [class.active]="currentView() === 'auth'" i18n>Login</button>
@@ -40,6 +41,8 @@
       <app-community></app-community>
     } @else if (currentView() === 'dashboard' && isLoggedIn()) {
       <app-user-dashboard></app-user-dashboard>
+    } @else if (currentView() === 'settings' && isLoggedIn()) {
+      <app-user-settings></app-user-settings>
     } @else if (currentView() === 'admin' && isAdmin()) {
       <app-admin-workshop-form></app-admin-workshop-form>
     } @else if (currentView() === 'auth') {

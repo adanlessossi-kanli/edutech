@@ -1,7 +1,7 @@
 describe('Workshop Enrollment', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.get('.nav-btn').contains('Workshops').click();
+    cy.contains('button', 'Workshops').click();
   });
 
   it('should require login to enroll', () => {
@@ -10,13 +10,13 @@ describe('Workshop Enrollment', () => {
 
   it('should enable enrollment after login', () => {
     cy.loginAsUser();
-    cy.get('.nav-btn').contains('Workshops').click();
+    cy.contains('button', 'Workshops').click();
     cy.get('.enroll-btn').first().should('contain', 'Enroll Now');
   });
 
   it('should show full status for full workshops', () => {
     cy.loginAsUser();
-    cy.get('.nav-btn').contains('Workshops').click();
+    cy.contains('button', 'Workshops').click();
     cy.get('.enroll-btn').should('exist');
   });
 

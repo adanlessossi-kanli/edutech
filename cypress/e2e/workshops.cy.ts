@@ -4,12 +4,14 @@ describe('Workshops', () => {
   const workshopsPage = new WorkshopsPage();
 
   beforeEach(() => {
+    cy.intercept('GET', '**/api/workshops', { fixture: 'workshops.json' });
     workshopsPage.visit();
+    cy.waitForPageLoad();
   });
 
   it('should display workshop list', () => {
     cy.get('.workshop-list-container').should('be.visible');
-    cy.get('.workshop-card').should('have.length.greaterThan', 0);
+    cy.get('.workshop-card').should('be.visible');
   });
 
   it('should display search bar', () => {
@@ -18,17 +20,20 @@ describe('Workshops', () => {
 
   it('should search workshops', () => {
     workshopsPage.searchWorkshop('React');
-    workshopsPage.getWorkshopCards().should('have.length.greaterThan', 0);
+    cy.wait(300);
+    workshopsPage.getWorkshopCards().should('be.visible');
   });
 
   it('should filter by category', () => {
     workshopsPage.filterByCategory('Frontend');
-    workshopsPage.getWorkshopCards().should('have.length.greaterThan', 0);
+    cy.wait(300);
+    workshopsPage.getWorkshopCards().should('be.visible');
   });
 
   it('should filter by level', () => {
     workshopsPage.filterByLevel('Beginner');
-    workshopsPage.getWorkshopCards().should('have.length.greaterThan', 0);
+    cy.wait(300);
+    workshopsPage.getWorkshopCards().should('be.visible');
   });
 
   it('should display workshop details', () => {
@@ -44,6 +49,6 @@ describe('Workshops', () => {
   });
 
   it('should display enroll button', () => {
-    cy.get('.enroll-btn').should('have.length.greaterThan', 0);
+    cy.get('.enroll-btn').should('be.visible');
   });
 });

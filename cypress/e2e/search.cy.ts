@@ -1,7 +1,7 @@
 describe('Workshop Search', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.get('.nav-btn').contains('Workshops').click();
+    cy.contains('button', 'Workshops').click();
   });
 
   it('should display search input', () => {

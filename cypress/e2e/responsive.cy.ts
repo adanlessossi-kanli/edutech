@@ -21,12 +21,12 @@ describe('Responsive Design', () => {
       });
 
       it('should navigate to workshops', () => {
-        cy.get('.nav-btn').contains('Workshops').click();
+        cy.contains('button', 'Workshops').click();
         cy.get('.workshop-list-container').should('be.visible');
       });
 
       it('should display workshop cards', () => {
-        cy.get('.nav-btn').contains('Workshops').click();
+        cy.contains('button', 'Workshops').click();
         cy.get('.workshop-card').should('have.length.greaterThan', 0);
       });
     });

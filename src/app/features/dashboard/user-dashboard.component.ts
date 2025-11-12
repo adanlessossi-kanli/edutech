@@ -31,7 +31,10 @@ import { Progress } from '../../core/models/enhanced.model';
 
       <div class="dashboard-content">
         <div class="main-content">
-          <app-progress-tracker [userProgress]="userProgress()"></app-progress-tracker>
+          <div class="enrolled-workshops">
+            <h2>My Workshops</h2>
+            <app-progress-tracker [userProgress]="userProgress()"></app-progress-tracker>
+          </div>
         </div>
         
         <div class="sidebar-content">
@@ -77,6 +80,10 @@ import { Progress } from '../../core/models/enhanced.model';
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 30px;
+    }
+    .enrolled-workshops h2 {
+      margin-bottom: 20px;
+      color: #374151;
     }
     @media (max-width: 768px) {
       .dashboard-content {

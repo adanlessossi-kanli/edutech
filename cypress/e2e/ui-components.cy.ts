@@ -8,7 +8,7 @@ describe('UI Components', () => {
   });
 
   it('should display navigation buttons', () => {
-    cy.get('.nav-btn').should('have.length.greaterThan', 1);
+    cy.get('button').should('have.length.greaterThan', 1);
   });
 
   it('should display benefit cards on landing', () => {
@@ -16,7 +16,7 @@ describe('UI Components', () => {
   });
 
   it('should display workshop cards with all info', () => {
-    cy.get('.nav-btn').contains('Workshops').click();
+    cy.contains('button', 'Workshops').click();
     cy.get('.workshop-card').first().within(() => {
       cy.get('h3').should('exist');
       cy.get('.instructor').should('exist');
@@ -26,7 +26,7 @@ describe('UI Components', () => {
   });
 
   it('should display filters sidebar', () => {
-    cy.get('.nav-btn').contains('Workshops').click();
+    cy.contains('button', 'Workshops').click();
     cy.get('.filters-sidebar').should('be.visible');
     cy.get('.filters-sidebar h3').should('contain', 'Filters');
   });

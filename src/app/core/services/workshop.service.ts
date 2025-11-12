@@ -1,46 +1,26 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Workshop } from '../models/workshop.model';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkshopService {
-  private workshops = signal<Workshop[]>([
-    {
-      id: '1',
-      title: 'Advanced React Patterns',
-      description: 'Master advanced React patterns including hooks, context, and performance optimization',
-      instructor: 'Sarah Chen',
-      duration: 180,
-      price: 149,
-      category: 'Frontend',
-      level: 'Advanced',
-      maxParticipants: 25,
-      currentParticipants: 18,
-      startDate: new Date('2024-02-15T14:00:00'),
-      endDate: new Date('2024-02-15T17:00:00'),
-      tags: ['React', 'JavaScript', 'Performance'],
-      isLive: false
-    },
-    {
-      id: '2',
-      title: 'Microservices with Node.js',
-      description: 'Build scalable microservices architecture using Node.js and Docker',
-      instructor: 'Mike Rodriguez',
-      duration: 240,
-      price: 199,
-      category: 'Backend',
-      level: 'Intermediate',
-      maxParticipants: 30,
-      currentParticipants: 22,
-      startDate: new Date('2024-02-20T10:00:00'),
-      endDate: new Date('2024-02-20T14:00:00'),
-      tags: ['Node.js', 'Microservices', 'Docker'],
-      isLive: true
-    }
-  ]);
+  private http = inject(HttpClient);
+  private apiUrl = '/api/workshops';
+  private workshops = signal<Workshop[]>([]);
+  private loaded = false;
 
   getWorkshops() {
+    if (!this.loaded) {
+      this.http.get<Workshop[]>(this.apiUrl).pipe(
+        tap(workshops => {
+          this.workshops.set(workshops);
+          this.loaded = true;
+        })
+      ).subscribe();
+    }
     return this.workshops.asReadonly();
   }
 

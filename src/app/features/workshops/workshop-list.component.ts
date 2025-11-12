@@ -26,19 +26,22 @@ import { ApiService } from '../../core/services/api.service';
       
       <div class="filters">
         <select [(ngModel)]="selectedCategory" (change)="onFilterChange()" class="filter-select">
-          <option value="">All Categories</option>
+          <option value="">All</option>
           <option value="Frontend">Frontend</option>
           <option value="Backend">Backend</option>
           <option value="DevOps">DevOps</option>
           <option value="Mobile">Mobile</option>
+          <option value="Data Science">Data Science</option>
         </select>
         
         <select [(ngModel)]="selectedLevel" (change)="onFilterChange()" class="filter-select">
-          <option value="">All Levels</option>
+          <option value="">All</option>
           <option value="Beginner">Beginner</option>
           <option value="Intermediate">Intermediate</option>
           <option value="Advanced">Advanced</option>
         </select>
+        
+        <button (click)="resetFilters()" class="reset-filters-btn">Reset Filters</button>
       </div>
 
       <div class="content-layout">
@@ -97,6 +100,17 @@ import { ApiService } from '../../core/services/api.service';
       border-radius: 4px;
       background: white;
     }
+    .reset-filters-btn {
+      padding: 8px 16px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: #6b7280;
+      color: white;
+      cursor: pointer;
+    }
+    .reset-filters-btn:hover {
+      background: #4b5563;
+    }
     .content-layout {
       display: grid;
       grid-template-columns: 300px 1fr;
@@ -147,10 +161,19 @@ export class WorkshopListComponent {
   async ngOnInit() {
     try {
       const workshops = await this.apiService.getWorkshops();
-      this.filteredWorkshops.set(workshops);
+      if (workshops && workshops.length > 0) {
+        this.filteredWorkshops.set(workshops);
+      } else {
+        this.loadWorkshops();
+      }
     } catch (error) {
       console.error('Failed to load workshops:', error);
+      this.loadWorkshops();
     }
+  }
+
+  loadWorkshops() {
+    this.filteredWorkshops.set(this.workshopService.getWorkshops()());
   }
 
   onSearch() {
@@ -197,5 +220,13 @@ export class WorkshopListComponent {
     }
     
     this.filteredWorkshops.set(workshops);
+  }
+
+  resetFilters() {
+    this.searchQuery.set('');
+    this.selectedCategory.set('');
+    this.selectedLevel.set('');
+    this.currentFilters.set(null);
+    this.applyFilters();
   }
 }

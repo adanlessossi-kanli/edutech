@@ -2,7 +2,7 @@ describe('Form Validation', () => {
   describe('Login Form', () => {
     beforeEach(() => {
       cy.visit('/');
-      cy.get('.nav-btn').contains('Login').click();
+      cy.contains('button', 'Login').click();
     });
 
     it('should display login form fields', () => {
@@ -27,7 +27,7 @@ describe('Form Validation', () => {
   describe('Admin Workshop Form', () => {
     beforeEach(() => {
       cy.loginAsAdmin();
-      cy.get('.nav-btn').contains('Publish').click();
+      cy.contains('button', 'Publish').click();
     });
 
     it('should display all required fields', () => {

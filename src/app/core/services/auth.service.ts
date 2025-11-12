@@ -5,8 +5,8 @@ import { User } from '../models/workshop.model';
   providedIn: 'root'
 })
 export class AuthService {
-  private currentUser = signal<User | null>(null);
-  private isAuthenticated = signal(false);
+  private currentUser = signal<User | null>(this.loadUserFromStorage());
+  private isAuthenticated = signal(this.loadUserFromStorage() !== null);
 
   getCurrentUser() {
     return this.currentUser.asReadonly();
@@ -29,6 +29,7 @@ export class AuthService {
     
     this.currentUser.set(mockUser);
     this.isAuthenticated.set(true);
+    localStorage.setItem('currentUser', JSON.stringify(mockUser));
     return true;
   }
 
@@ -44,12 +45,19 @@ export class AuthService {
     
     this.currentUser.set(newUser);
     this.isAuthenticated.set(true);
+    localStorage.setItem('currentUser', JSON.stringify(newUser));
     return true;
   }
 
   logout() {
     this.currentUser.set(null);
     this.isAuthenticated.set(false);
+    localStorage.removeItem('currentUser');
+  }
+
+  private loadUserFromStorage(): User | null {
+    const stored = localStorage.getItem('currentUser');
+    return stored ? JSON.parse(stored) : null;
   }
 
   isAdmin(): boolean {

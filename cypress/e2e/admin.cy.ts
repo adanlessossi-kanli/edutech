@@ -8,7 +8,7 @@ describe('Admin Features', () => {
   });
 
   it('should show publish button for admin', () => {
-    cy.get('.nav-btn').contains('Publish').should('be.visible');
+    cy.contains('button', 'Publish').should('be.visible');
   });
 
   it('should access admin panel', () => {
@@ -31,12 +31,12 @@ describe('Admin Features', () => {
   });
 
   it('should have category dropdown', () => {
-    cy.get('.nav-btn').contains('Publish').click();
+    cy.contains('button', 'Publish').click();
     cy.get('select[name="category"]').children().should('have.length.greaterThan', 1);
   });
 
   it('should have level dropdown', () => {
-    cy.get('.nav-btn').contains('Publish').click();
+    cy.contains('button', 'Publish').click();
     cy.get('select[name="level"]').children().should('have.length.greaterThan', 1);
   });
 });

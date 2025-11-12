@@ -1,6 +1,6 @@
 export class AdminPage {
   visit() {
-    cy.get('.nav-btn').contains('Publish').click();
+    cy.contains('button', 'Publish').click();
   }
 
   fillTitle(title: string) {

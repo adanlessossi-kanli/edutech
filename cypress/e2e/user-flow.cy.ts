@@ -3,30 +3,30 @@ describe('Complete User Flow', () => {
     cy.visit('/');
     cy.contains('Transform Your Tech Career').should('be.visible');
     
-    cy.get('.nav-btn').contains('Workshops').click();
+    cy.contains('button', 'Workshops').click();
     cy.get('.workshop-card').should('have.length.greaterThan', 0);
     
-    cy.get('.nav-btn').contains('Login').click();
+    cy.contains('button', 'Login').click();
     cy.get('input[type="email"]').type('user@example.com');
     cy.get('input[type="password"]').type('password');
     cy.get('button[type="submit"]').click();
     
     cy.get('.user-info').should('be.visible');
-    cy.get('.nav-btn').contains('Dashboard').click();
+    cy.contains('button', 'Dashboard').click();
     cy.get('.dashboard-container').should('be.visible');
     
-    cy.get('.nav-btn').contains('Workshops').click();
+    cy.contains('button', 'Workshops').click();
     cy.get('.enroll-btn').first().should('contain', 'Enroll Now');
     
     cy.logout();
-    cy.get('.nav-btn').contains('Login').should('be.visible');
+    cy.contains('button', 'Login').should('be.visible');
   });
 
   it('should complete admin workflow', () => {
     cy.loginAsAdmin();
     
-    cy.get('.nav-btn').contains('Publish').should('be.visible');
-    cy.get('.nav-btn').contains('Publish').click();
+    cy.contains('button', 'Publish').should('be.visible');
+    cy.contains('button', 'Publish').click();
     
     cy.get('.form-container').should('be.visible');
     cy.get('input[name="title"]').type('E2E Test Workshop');

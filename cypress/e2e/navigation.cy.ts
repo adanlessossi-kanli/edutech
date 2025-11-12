@@ -4,10 +4,10 @@ describe('Application Navigation', () => {
   });
 
   it('should navigate between all main pages', () => {
-    cy.get('.nav-btn').contains('Workshops').click();
+    cy.contains('button', 'Workshops').click();
     cy.get('.workshop-list-container').should('be.visible');
     
-    cy.get('.nav-btn').contains('Home').click();
+    cy.contains('button', 'Home').click();
     cy.contains('Transform Your Tech Career').should('be.visible');
   });
 
@@ -22,13 +22,13 @@ describe('Application Navigation', () => {
   });
 
   it('should show active state on current page', () => {
-    cy.get('.nav-btn').contains('Workshops').click();
-    cy.get('.nav-btn').contains('Workshops').should('have.class', 'active');
+    cy.contains('button', 'Workshops').click();
+    cy.contains('button', 'Workshops').should('have.class', 'active');
   });
 
   it('should navigate back to home', () => {
-    cy.get('.nav-btn').contains('Workshops').click();
-    cy.get('.nav-btn').contains('Home').click();
+    cy.contains('button', 'Workshops').click();
+    cy.contains('button', 'Home').click();
     cy.contains('Transform Your Tech Career').should('be.visible');
   });
 });

@@ -24,14 +24,14 @@ describe('Authentication', () => {
 
   it('should show dashboard after login', () => {
     authPage.login('user@example.com', 'password');
-    cy.get('.nav-btn').contains('Dashboard').click();
+    cy.contains('button', 'Dashboard').click();
     cy.get('.dashboard-container').should('be.visible');
   });
 
   it('should logout successfully', () => {
     cy.loginAsUser();
     cy.logout();
-    cy.get('.nav-btn').contains('Login').should('be.visible');
+    cy.contains('button', 'Login').should('be.visible');
   });
 
   it('should show admin hint', () => {

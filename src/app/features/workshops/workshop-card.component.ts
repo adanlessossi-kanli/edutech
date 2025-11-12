@@ -148,6 +148,7 @@ export class WorkshopCardComponent {
   
   showPayment = signal(false);
   showReviews = signal(false);
+  isEnrolled = signal(false);
 
   constructor() {
     // Listen for payment close event
@@ -159,7 +160,7 @@ export class WorkshopCardComponent {
   canEnroll(): boolean {
     const user = this.authService.getCurrentUser()();
     const workshop = this.workshop();
-    return !!user && workshop.currentParticipants < workshop.maxParticipants;
+    return !!user && workshop.currentParticipants < workshop.maxParticipants && !this.isEnrolled();
   }
 
   getEnrollButtonText(): string {
@@ -167,6 +168,7 @@ export class WorkshopCardComponent {
     const workshop = this.workshop();
     
     if (!user) return 'Login to Enroll';
+    if (this.isEnrolled()) return 'Enrolled';
     if (workshop.currentParticipants >= workshop.maxParticipants) return 'Full';
     return 'Enroll Now';
   }
@@ -174,6 +176,8 @@ export class WorkshopCardComponent {
   onEnroll() {
     const user = this.authService.getCurrentUser()();
     if (user && this.canEnroll()) {
+      this.isEnrolled.set(true);
+      this.workshopService.enrollUser(this.workshop().id, user.id);
       this.showPayment.set(true);
     }
   }

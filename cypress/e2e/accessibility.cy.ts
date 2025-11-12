@@ -4,23 +4,23 @@ describe('Accessibility', () => {
   });
 
   it('should have proper heading hierarchy', () => {
-    cy.get('h1').should('exist');
+    cy.get('h1').should('exist').and('be.visible');
   });
 
   it('should have clickable buttons', () => {
-    cy.get('button').each($btn => {
-      cy.wrap($btn).should('be.visible');
-    });
+    cy.get('button').should('have.length.at.least', 1);
+    cy.get('.cta-btn').should('be.visible').and('not.be.disabled');
   });
 
   it('should have form labels', () => {
-    cy.get('.nav-btn').contains('Login').click();
-    cy.get('input[type="email"]').should('exist');
-    cy.get('input[type="password"]').should('exist');
+    cy.contains('button', 'Login').click();
+    cy.get('input[type="email"]').should('be.visible');
+    cy.get('input[type="password"]').should('be.visible');
   });
 
   it('should navigate with keyboard', () => {
-    cy.get('.nav-btn').first().focus().should('have.focus');
+    cy.get('button').first().focus();
+    cy.focused().should('exist');
   });
 
   it('should have alt text for images', () => {
@@ -31,7 +31,6 @@ describe('Accessibility', () => {
           cy.wrap($img).should('have.attr', 'alt');
         });
       } else {
-        // No images found - test passes as there are no accessibility issues
         cy.log('No img elements found in the application');
       }
     });

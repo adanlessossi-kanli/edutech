@@ -1,7 +1,7 @@
 export class AuthPage {
   visit() {
     cy.visit('/');
-    cy.get('.nav-btn').contains('Login').click();
+    cy.contains('button', 'Login').click();
   }
 
   fillEmail(email: string) {

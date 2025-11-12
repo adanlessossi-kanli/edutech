@@ -61,6 +61,7 @@ import { Workshop } from '../../core/models/workshop.model';
             <option value="Backend">Backend</option>
             <option value="DevOps">DevOps</option>
             <option value="Mobile">Mobile</option>
+            <option value="Data Science">Data Science</option>
           </select>
           
           <select [(ngModel)]="level" name="level" required class="form-select">

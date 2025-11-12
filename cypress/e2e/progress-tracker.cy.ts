@@ -1,7 +1,7 @@
 describe('Progress Tracker', () => {
   beforeEach(() => {
     cy.loginAsUser();
-    cy.get('.nav-btn').contains('Dashboard').click();
+    cy.contains('button', 'Dashboard').click();
   });
 
   it('should display progress container', () => {

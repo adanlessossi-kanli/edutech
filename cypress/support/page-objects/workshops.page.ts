@@ -1,7 +1,7 @@
 export class WorkshopsPage {
   visit() {
     cy.visit('/');
-    cy.get('.nav-btn').contains('Workshops').click();
+    cy.contains('button', 'Workshops').click();
   }
 
   searchWorkshop(query: string) {
@@ -9,11 +9,11 @@ export class WorkshopsPage {
   }
 
   filterByCategory(category: string) {
-    cy.get('select').first().select(category);
+    cy.get('.filters select').first().should('be.visible').select(category);
   }
 
   filterByLevel(level: string) {
-    cy.get('select').eq(1).select(level);
+    cy.get('.filters select').eq(1).should('be.visible').select(level);
   }
 
   getWorkshopCards() {

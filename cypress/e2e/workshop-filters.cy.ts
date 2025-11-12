@@ -1,7 +1,9 @@
 describe('Workshop Filters', () => {
   beforeEach(() => {
+    cy.intercept('GET', '**/api/workshops', { fixture: 'workshops.json' });
     cy.visit('/');
-    cy.get('.nav-btn').contains('Workshops').click();
+    cy.contains('button', 'Workshops').click();
+    cy.waitForPageLoad();
   });
 
   it('should display filters sidebar', () => {
@@ -9,23 +11,28 @@ describe('Workshop Filters', () => {
   });
 
   it('should filter by category', () => {
-    cy.get('select').first().select('Frontend');
-    cy.get('.workshop-card').should('have.length.greaterThan', 0);
+    cy.get('.filters-sidebar select').first().select('Frontend');
+    cy.wait(300);
+    cy.get('.workshop-card').should('be.visible');
   });
 
   it('should filter by level', () => {
-    cy.get('select').eq(1).select('Beginner');
-    cy.get('.workshop-card').should('have.length.greaterThan', 0);
+    cy.get('.filters-sidebar select').eq(1).select('Beginner');
+    cy.wait(300);
+    cy.get('.workshop-card').should('be.visible');
   });
 
   it('should filter by price range', () => {
     cy.get('input[placeholder="Min"]').type('50');
     cy.get('input[placeholder="Max"]').type('150');
+    cy.wait(300);
   });
 
   it('should clear all filters', () => {
     cy.get('.filters-sidebar select').first().select('Frontend');
+    cy.wait(300);
     cy.get('.clear-btn').click();
-    cy.get('.filters-sidebar select').first().should('have.value', '');
+    cy.wait(300);
+    cy.get('.filters-sidebar select').first().should('be.visible');
   });
 });

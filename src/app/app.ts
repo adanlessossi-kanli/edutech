@@ -6,6 +6,7 @@ import { WorkshopListComponent } from './features/workshops/workshop-list.compon
 import { AuthComponent } from './features/auth/auth.component';
 import { AdminWorkshopFormComponent } from './features/admin/admin-workshop-form.component';
 import { UserDashboardComponent } from './features/dashboard/user-dashboard.component';
+import { UserSettingsComponent } from './features/user/user-settings.component';
 import { LandingComponent } from './features/landing/landing.component';
 import { InstructorsComponent } from './features/landing/instructors.component';
 import { HandsOnLearningComponent } from './features/landing/hands-on-learning.component';
@@ -18,7 +19,7 @@ import { LanguageSwitcherComponent } from './shared/components/language-switcher
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, WorkshopListComponent, AuthComponent, AdminWorkshopFormComponent, UserDashboardComponent, LandingComponent, InstructorsComponent, HandsOnLearningComponent, CertificatesComponent, CareerSupportComponent, FlexibleScheduleComponent, CommunityComponent, LanguageSwitcherComponent],
+  imports: [RouterOutlet, CommonModule, WorkshopListComponent, AuthComponent, AdminWorkshopFormComponent, UserDashboardComponent, UserSettingsComponent, LandingComponent, InstructorsComponent, HandsOnLearningComponent, CertificatesComponent, CareerSupportComponent, FlexibleScheduleComponent, CommunityComponent, LanguageSwitcherComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -27,7 +28,7 @@ export class App implements OnInit {
   private authService = inject(AuthService);
   private location = inject(Location);
   
-  currentView = signal<'landing' | 'workshops' | 'instructors' | 'hands-on' | 'certificates' | 'career' | 'flexible' | 'community' | 'admin' | 'auth' | 'dashboard'>('landing');
+  currentView = signal<'landing' | 'workshops' | 'instructors' | 'hands-on' | 'certificates' | 'career' | 'flexible' | 'community' | 'admin' | 'auth' | 'dashboard' | 'settings'>('landing');
 
   ngOnInit() {
     window.addEventListener('popstate', () => {
@@ -100,5 +101,9 @@ export class App implements OnInit {
 
   showDashboard() {
     this.navigate('dashboard');
+  }
+
+  showSettings() {
+    this.navigate('settings');
   }
 }

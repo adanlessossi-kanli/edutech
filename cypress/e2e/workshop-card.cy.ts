@@ -1,7 +1,7 @@
 describe('Workshop Card', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.get('.nav-btn').contains('Workshops').click();
+    cy.contains('button', 'Workshops').click();
   });
 
   it('should display workshop cards', () => {

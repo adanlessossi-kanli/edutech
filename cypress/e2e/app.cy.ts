@@ -9,7 +9,7 @@ describe('Edutech App', () => {
 
   it('should display navigation bar', () => {
     cy.get('.nav-menu').should('be.visible');
-    cy.get('.nav-btn').should('have.length.greaterThan', 0);
+    cy.get('button').should('have.length.greaterThan', 0);
   });
 
   it('should show landing page by default', () => {
@@ -17,12 +17,12 @@ describe('Edutech App', () => {
   });
 
   it('should navigate to workshops', () => {
-    cy.get('.nav-btn').contains('Workshops').click();
+    cy.contains('button', 'Workshops').click();
     cy.get('.workshop-list-container').should('be.visible');
   });
 
   it('should navigate to login page', () => {
-    cy.get('.nav-btn').contains('Login').click();
+    cy.contains('button', 'Login').click();
     cy.get('.auth-container').should('be.visible');
   });
 

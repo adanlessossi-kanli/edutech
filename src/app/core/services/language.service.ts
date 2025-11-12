@@ -5,7 +5,7 @@ import { Injectable, LOCALE_ID, Inject } from '@angular/core';
 })
 export class LanguageService {
   private currentLocale: string;
-  private supportedLocales = ['en', 'fr'];
+  private supportedLocales = ['en', 'fr', 'ar'];
 
   constructor(@Inject(LOCALE_ID) locale: string) {
     this.currentLocale = locale;
@@ -44,7 +44,8 @@ export class LanguageService {
   getLanguageName(locale: string): string {
     const names: { [key: string]: string } = {
       'en': 'English',
-      'fr': 'Français'
+      'fr': 'Français',
+      'ar': 'العربية'
     };
     return names[locale] || locale;
   }
